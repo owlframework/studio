@@ -1,0 +1,424 @@
+/* =========================================
+   1. VARIABLES & RESET
+========================================= */
+:root {
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --primary: #7F00FF; 
+    --primary-soft: #f5f0ff;
+    --input-bg: #ffffff;
+    --sidebar-width: 260px;
+    --header-height: 70px;
+}
+
+body.dark-mode {
+    --bg-body: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --primary-soft: rgba(127, 0, 255, 0.15);
+    --input-bg: #0f172a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    transition: background 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.icon-lg {
+    font-size: 2rem; 
+}
+a { text-decoration: none; }
+
+/* =========================================
+   2. AUTHENTICATION LAYOUT
+========================================= */
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.auth-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.admin-card {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.admin-card.large {
+    max-width: 800px; /* Used for forms in dashboard */
+}
+
+.auth-header { text-align: center; margin-bottom: 2rem; }
+.auth-header h1 { font-size: 1.5rem; margin-top: 1rem; color: var(--text-main); }
+.auth-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+/* =========================================
+   3. DASHBOARD & SIDEBAR LAYOUT
+========================================= */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.sidebar .logo {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.nav-menu {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+}
+
+.nav-menu a {
+    color: var(--text-muted);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.2s;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.nav-menu a i { font-size: 1.25rem; min-width: 1.25rem; }
+.nav-menu a.active, .nav-menu a:hover {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+/* Sidebar Collapsed State (Desktop) */
+.sidebar.collapsed { width: 80px; }
+.sidebar.collapsed .logo span, 
+.sidebar.collapsed .nav-menu a span {
+    display: none;
+}
+.sidebar.collapsed .logo { justify-content: center; padding: 0; }
+.sidebar.collapsed .nav-menu a { justify-content: center; padding: 0.8rem 0; }
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Prevents flex children from breaking out */
+    transition: all 0.3s ease;
+}
+
+/* =========================================
+   4. HEADER & METRIC CARDS
+========================================= */
+.top-nav {
+    height: var(--header-height);
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.header-left, .header-right { display: flex; align-items: center; gap: 1rem; }
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.content-body { padding: 2rem; flex: 1; }
+.section-title { margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 600; }
+
+/* Metric Cards Grid */
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.metric-info span { display: block; color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.5rem; }
+.metric-info h3 { font-size: 1.75rem; color: var(--text-main); }
+.metric-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+}
+
+/* =========================================
+   5. RESPONSIVE TABLES
+========================================= */
+.table-wrapper {
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+    width: 100%;
+    overflow-x: auto; /* Enables horizontal scroll on small screens */
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 700px; /* Forces scroll if screen is too small */
+}
+
+th {
+    background: rgba(0,0,0,0.02);
+    padding: 1rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+tr:last-child td { border-bottom: none; }
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge.active { background: #dcfce7; color: #15803d; }
+.badge.inactive { background: #fee2e2; color: #b91c1c; }
+
+/* =========================================
+   6. FORMS & FOOTER
+========================================= */
+.input-group { margin-bottom: 1.25rem; }
+.input-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-main); }
+.input-wrapper { position: relative; display: flex; align-items: center; }
+.input-wrapper i { position: absolute; left: 12px; color: var(--text-muted); font-size: 1.1rem; }
+
+input, textarea, select {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--input-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+.input-wrapper input { padding-left: 2.5rem; }
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-auto { width: auto; padding: 0.6rem 1.2rem; }
+
+.admin-footer {
+    padding: 1.5rem 2rem;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+.alerterror{
+    color: red;
+    }
+.alertsuccess{
+    color: green;
+    }
+
+/* =========================================
+   7. MOBILE RESPONSIVE LOGIC
+========================================= */
+.sidebar-overlay { display: none; }
+
+@media (max-width: 992px) {
+    /* Transform Sidebar into an Off-Canvas Mobile Menu */
+    .sidebar {
+        position: fixed;
+        left: -100%; /* Hidden by default */
+        height: 100vh;
+        z-index: 1000;
+    }
+    
+    .sidebar.mobile-active {
+        left: 0; /* Slides in */
+    }
+
+    /* Overlay behind the mobile sidebar */
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        display: none;
+    }
+    
+    .sidebar-overlay.mobile-active {
+        display: block;
+    }
+    
+    /* Ensure padding adjusts on mobile */
+    .content-body { padding: 1.5rem; }
+    .top-nav { padding: 0 1.5rem; }
+}
+
+
+
+/* =========================================
+   SIDEBAR DROPDOWN MENU
+========================================= */
+.nav-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Push the caret arrow to the far right */
+.dropdown-toggle {
+    justify-content: space-between;
+}
+
+.toggledisplay{
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+}
+.caret-icon {
+    font-size: 1rem !important;
+    transition: transform 0.3s ease;
+}
+
+/* Submenu container (Hidden by default) */
+.dropdown-menu {
+    display: none;
+    flex-direction: column;
+    padding-left: 2.5rem; /* Indent sub-items to align with text */
+    margin-top: 0.25rem;
+    gap: 0.25rem;
+}
+
+/* Style the sub-links to look slightly different than main links */
+.dropdown-menu a {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.dropdown-menu a:hover {
+    background: transparent;
+    color: var(--primary);
+    transform: translateX(4px); /* Cute little slide effect on hover */
+}
+
+/* Active State (When dropdown is clicked) */
+.nav-dropdown.active .dropdown-menu {
+    display: flex;
+}
+
+.nav-dropdown.active .caret-icon {
+    transform: rotate(180deg); /* Flip the arrow */
+}
+
+/* Hide dropdown elements when sidebar is collapsed on desktop */
+.sidebar.collapsed .caret-icon,
+.sidebar.collapsed .dropdown-menu {
+    display: none !important;
+}
