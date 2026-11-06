@@ -6,7 +6,7 @@ This directory is dedicated to handling all API communications, webhook listener
 
 ## 📂 Purpose & Usage
 
-The `api/` folder acts as the gateway for external clients, mobile applications, and third-party platforms (such as payment gateways, automated notifications, or external data feeds) to interact with your system.
+The `api/` folder acts as the gateway for external clients, mobile applications, and third-party platforms (such as payment gateways, automated notifications, or external data feeds) to interact with your system, fast and secure.
 
 *   **JSON Endpoints:** Expose structured data endpoints for frontend JavaScript apps or mobile clients.
 *   **Webhooks:** Receive secure payloads from external providers (e.g., payment confirmations, crypto node events).

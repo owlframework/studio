@@ -8,6 +8,8 @@ defined('ROOTPATH') OR die("Direct access denied.");
 $is_local = ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1');
 
 if ($is_local) {
+
+    $domain = Env::get('SITE_DOMAIN', 'demo.ng');
     /**
      * Local development configuration values loaded via environment variables.
      */
@@ -17,7 +19,7 @@ if ($is_local) {
     define('DB_PASS', Env::get('DB_PASSWORD'));
     
     // Resolve base URLs from environment variables with local defaults.
-    $local_domain = Env::get('SITE_DOMAIN', 'http://localhost/app/OwlStudio');
+    $local_domain = Env::get('SITE_DOMAIN', $domain);
     define('UROOT', rtrim($local_domain, '/'));
     define('AROOT', rtrim($local_domain, '/') . '/admin');
     
