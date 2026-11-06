@@ -20,6 +20,11 @@ if (defined('DEBUG') && DEBUG) {
     error_reporting(0);
 }
 
+
+// Load environment configuration variables from the root .env file.
+require_once ROOTPATH . '/core/Env.php';
+\Core\Env::load(ROOTPATH . '.env');
+
 // Register Composer autoloader
 require_once ROOTPATH . 'vendor/autoload.php';
  

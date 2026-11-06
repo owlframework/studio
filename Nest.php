@@ -32,9 +32,6 @@ header("Content-Security-Policy: " .
     "connect-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;"
 );
 
-// Load environment configuration variables from the root .env file.
-\Core\Env::load(ROOTPATH . '.env');
- 
 // Require core framework classes and register global class aliases.
 require_once ROOTPATH . 'core/Model.php';
 require_once ROOTPATH . 'core/Session.php';

@@ -12,9 +12,9 @@ if ($is_local) {
      * Local development configuration values loaded via environment variables.
      */
     define('DB_HOST', Env::get('DB_HOST', 'localhost'));
-    define('DB_NAME', Env::get('DB_DATABASE', 'owl'));
-    define('DB_USER', Env::get('DB_USER', 'root'));
-    define('DB_PASS', Env::get('DB_PASSWORD', ''));
+    define('DB_NAME', Env::get('DB_DATABASE'));
+    define('DB_USER', Env::get('DB_USERNAME'));  
+    define('DB_PASS', Env::get('DB_PASSWORD'));
     
     // Resolve base URLs from environment variables with local defaults.
     $local_domain = Env::get('SITE_DOMAIN', 'http://localhost/app/OwlStudio');
@@ -30,7 +30,7 @@ if ($is_local) {
 
     define('DB_HOST', Env::get('DB_HOST', 'localhost'));
     define('DB_NAME', Env::get('DB_DATABASE'));
-    define('DB_USER', Env::get('DB_USERS'));  
+    define('DB_USER', Env::get('DB_USERNAME'));  
     define('DB_PASS', Env::get('DB_PASSWORD'));
     
     // Construct dynamic production URLs.
