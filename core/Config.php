@@ -9,7 +9,7 @@ $is_local = ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_ADDR'] =
 
 if ($is_local) {
 
-    $domain = Env::get('SITE_DOMAIN', 'demo.ng');
+    $domain = Env::get('SITE_DOMAIN', 'http://localhost/owlstudio');
     /**
      * Local development configuration values loaded via environment variables.
      */

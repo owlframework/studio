@@ -23,7 +23,7 @@ The project structure is organized for maximum maintainability and clean separat
 Owl_Studio/
 ├── api/                  # Endpoints for third-party service communication
 ├── app/                  # Application-specific business logic
-│   ├── Requests/         # Route request handlers & payload processors
+│   ├── Requests/         # Route request handlers Contains the (auth, admin) folder
 │   ├── models/           # Data models (User, Login, Mail, etc.)
 │   └── Mailer/           # Built-in dynamic SMTP mail configuration
 ├── core/                 # Framework engine (Internal core files)

@@ -29,7 +29,12 @@ function user($redirect = false) {
     static $user_data = null; 
     
     if ($user_data === null && \Core\Session::has(AUTH_SESSION)) {
-        $model = new Register();
+        if (!class_exists('Register') && !class_exists('User')) {
+            throw new \Exception("Framework Error: You must create either a 'User' or 'Register' model for authentication to function.");
+        }
+
+        $modelName = class_exists('User') ? 'User' : 'Register';
+        $model = new $modelName();
         $user_data = $model->first(['id' => \Core\Session::get(AUTH_SESSION)]);
     }
 
@@ -103,6 +108,17 @@ function render($data, $escape = false, $return = false) {
  * THE SMART REDIRECT
  */
 function send($path, $type = 'frontend') {
+    $path = ltrim($path, '/');
+    
+    // Auto-detect type if the path explicitly starts with backend/ or frontend/
+    if (str_starts_with($path, 'backend/')) {
+        $type = 'backend';
+        $path = substr($path, 8); // Remove 'backend/' prefix
+    } elseif (str_starts_with($path, 'frontend/')) {
+        $type = 'frontend';
+        $path = substr($path, 9); // Remove 'frontend/' prefix
+    }
+    
     \Core\Response::redirect($path, $type);
 }
 
